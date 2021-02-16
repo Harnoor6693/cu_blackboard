@@ -1,9 +1,9 @@
 # CU Blackboard:-
 It will automatically joins each class of current day and makes count of the total time you are in Lecture. If current class total time is less than 50 minutes than it will join the next class in new tab without closing the current class tab otherwise it will join the next class in new tab and close the current class tab.
 
-## Link to executable file (.exe)
-Just download and run
-Look for "Assets" menu 
+## Link to executable file (.exe):
+.> Just download and run.
+.> Look for "Assets" menu 
 https://github.com/Harnoor6693/cu_blackboard/releases
 
 
