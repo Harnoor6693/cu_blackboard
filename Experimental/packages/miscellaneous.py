@@ -45,12 +45,23 @@ class GetUserDetails():
         self.userFileName = userFileName
 
     def getDetails(self):
+        # If user inputs multiple wrong inputs
+        failInput = False
+        tempCounter = 0
+
         if not os.path.isfile(self.userFileName):
             USERNAME = str(input("Enter Username: "))
             PASSWORD = str(input("Enter Password: "))
+            
+            tempCounter = 0
             while((len(USERNAME)<=0) and (len(PASSWORD)<=0)):
                 USERNAME = str(input("Enter Username: "))
                 PASSWORD = str(input("Enter Password: "))
+                tempCounter+=1
+                if tempCounter == 3:
+                    logger.error("3 Failed attempts. Exiting .....")
+                    failInput = True
+
             try:
                 with open(self.userFileName,'w',encoding="utf8") as f:
                     f.write(USERNAME+" ")
@@ -60,6 +71,7 @@ class GetUserDetails():
                 logger.error(msg)
                 logger.info("Exiting the program")
                 exit()
+
         else:
             try:
                 with open(self.userFileName,'r',encoding='utf8') as f:
@@ -79,12 +91,23 @@ class GetUserDetails():
                 print()
                 choice = str(input("Continue with same login details(y/n): ")).lower().strip()
                 print()
+
                 if choice:
-                    choice = choice[0]
-                    if choice == 'n':                                                                       # if user has new login details
+                    choice=choice[0]
+
+                    if choice=='n':                                                                     # if user has new login details
+                        USERNAME=""
+                        PASSWORD=""
+
+                        tempCounter=0
                         while((len(USERNAME)<=0) and (len(PASSWORD)<=0)):
                             USERNAME = str(input("Enter Username: "))
                             PASSWORD = str(input("Enter Password: "))
+                            tempCounter+=1
+                            if tempCounter == 3:
+                                logger.error("3 Failed attempts. Exiting .....")
+                                failInput = True
+
                         try:
                             with open(self.userFileName,'w',encoding="utf8") as f:
                                 f.write(USERNAME+" ")
@@ -94,22 +117,37 @@ class GetUserDetails():
                             logger.error(msg)
                             logger.info("Exiting the program")
                             exit()
+
                         choice='y'
+
                     elif ((choice!='y') and (choice!='n')):
-                        logger.warning("Enter a valid choice !!! (y/n) ")     
+                        logger.warning("Enter a valid choice !!! (y/n) ")  
+
                 else:
                     logger.warning("Enter a valid choice !!! (y/n) ")
+                    # Assigning some value to variable. So that it does not goes in infinite loop
+                    choice = 'n'                                                        
+
             msg = f"Continuing with: username: {USERNAME}    Password: {PASSWORD}"
             logger.info(msg)
 
-        return {'username':USERNAME,'password':PASSWORD}
+        return {'username':USERNAME,'password':PASSWORD, 'failInput':failInput}
 
     def getCorrectDetails(self):
         USERNAME=""
         PASSWORD=""
+
+        # If user inputs multiple wrong inputs
+        failInput = False
+        tempCounter = 0
+
         while((len(USERNAME)<=0) and (len(PASSWORD)<=0)):
                 USERNAME = str(input("Enter Username: "))
                 PASSWORD = str(input("Enter Password: "))
+                tempCounter+=1
+                if tempCounter == 3:
+                    logger.error("3 Failed attempts. Exiting .....")
+                    failInput = True
         try:
             with open(self.userFileName,'w',encoding="utf8") as f:
                 f.write(USERNAME+" ")
@@ -120,4 +158,4 @@ class GetUserDetails():
             logger.info("Exiting the program")
             exit()
             
-        return {'username':USERNAME, 'password':PASSWORD}
+        return {'username':USERNAME, 'password':PASSWORD, 'failInput':failInput}

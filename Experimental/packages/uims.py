@@ -53,6 +53,7 @@ class UimsManagement():
             is_connected()
         
         logger.info("Logging into UIMS")
+        tempCounter = 0
         # entering username and password in CUIMS
         while(networkAvaliable):
             try:
@@ -70,15 +71,28 @@ class UimsManagement():
             driver.get('https://uims.cuchd.in/UIMS/StudentHome.aspx')
             currentURL = str(driver.current_url) 
             if currentURL!="https://uims.cuchd.in/UIMS/StudentHome.aspx":
+                tempCounter+=1
                 logger.error("Username or Password is incorrect")
                 getDetailsOBJ = GetUserDetails("userData.txt")
                 newDetails = getDetailsOBJ.getCorrectDetails()
                 self.userName = newDetails['username']
                 self.password = newDetails['password']
+
+                # User unable to give valid input
+                if newDetails['failInput']:
+                    driver.close()
+                    exit()
+
                 logger.info(f"Username: {self.userName}  Password: {self.password}")
             else:
                 logger.info("Logged is successfully to UIMS")
                 break
+            
+            # valid input but not valid cridentials for UIMS
+            if tempCounter==3:
+                logger.error("3 unsuccessfull attempts to login. Exiting .....")
+                driver.close()
+                exit()
 
         # going to time table page
         logger.info("Getting your Time Table")

@@ -29,6 +29,8 @@ if __name__ == '__main__':
     userDetails = getDetailsOBJ.getDetails()
     userName = userDetails['username']
     password = userDetails['password']
+    if userDetails["failInput"]:
+        exit()
 
     # Getting details from UIMS
     uimsManagementOBJ = UimsManagement(TIMETABLE,userName,password,CHROMEPATH)
