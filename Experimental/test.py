@@ -1,18 +1,9 @@
-choice = 'n'
-username = ""
-password = ""
-while(choice!='y'):
-    choice = str(input("Continue with same login details(y/n): ")).lower().strip()
-    if choice:
-        choice=choice[0]
-        if choice=='n':
-            while( (len(username)<=0) and (len(password)<=0)):
-                username = input("Enter username:")
-                password = input("Enter Passowrd: ")
-        elif ((choice!='y') and (choice!='n')):
-            print("Enter a valid choice !!! (y/n) ")
-    else:
-        print("Enter a valid choice !!! (y/n) ")
-        choice = 'n'
+# https://github.com/tasos-py/Search-Engines-Scraper.git
+from search_engines import Google
 
-print(f"username:{username}  password:{password}")
+query = "Round-robin scheduling allows interactive tasks quicker access to the processor is quite complex to implement gives each task the same chance at the processor allows processor-bound tasks more time in the processor"
+engine = Google()
+results = engine.search(query,pages=1)
+links = results.links()
+
+print(links)
