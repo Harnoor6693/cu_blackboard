@@ -1,5 +1,5 @@
 from selenium import webdriver
-from .miscellaneous import is_connected, connectionCheck, LOCK, bbPermissionFlag
+from .miscellaneous import is_connected, connectionCheck, LOCK, bbPermissionFlag, logger
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,10 +7,8 @@ from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup as bs4
 from threading import Thread
-import logging, coloredlogs, time
+import logging, time
 
-logger = logging.getLogger(__name__)
-coloredlogs.install(level='DEBUG', logger=logger)
 
 
 class LoginBB():
@@ -87,14 +85,19 @@ class ClassManagement():
         return lectureNumber
 
 
-    # changing time from 12 to 24 hours
-    def joinClassDetails(self,data, IsLastClass):
-        if IsLastClass:
-            time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
-            classAttendTime = time12H + timedelta(minutes=45)
-        else:
-            time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
-            classAttendTime = time12H - timedelta(minutes=15)
+    # substracting 15 minutes from class joining time
+    def joinClassDetails(data):
+        time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
+        classAttendTime = time12H - timedelta(minutes=15)
+
+        return classAttendTime
+
+
+
+    # adding 45 minutes to class joining time
+    def nextClassDetails(data):
+        time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
+        classAttendTime = time12H + timedelta(minutes=45)
 
         return classAttendTime
 
@@ -110,7 +113,7 @@ class ClassManagement():
             return False
 
     # finding the joining link for particular class
-    def checkLinkAvailability(self,driver, classJoinName, nextClassJoinTime, classJoinTime):
+    def checkLinkAvailability(self,driver, classJoinName, nextClassJoinTime, defaultTabId):
         spanToBeOpened = ""
         linkNotAvailable = True
         timeRemainsForNextClass = True
@@ -143,6 +146,15 @@ class ClassManagement():
             networkAvaliable = connectionCheck()
             if not networkAvaliable:
                 is_connected()
+
+            while(True):
+                if not LOCK:
+                    LOCK = True
+                    self.driver.switch_to.window(self.defaultTabId)
+                    break
+                else:
+                    logging.info("Waiting for other tabs to finish their task")
+                    time.sleep(2)
             
             # opening dropdown to find class joining button
             while(networkAvaliable):
@@ -174,6 +186,7 @@ class ClassManagement():
                 timeRemainsForNextClass = False
             
             time.sleep(30)
+            LOCK = False
 
         if not linkNotAvailable:
             return [True,spanToBeOpened]
@@ -233,18 +246,15 @@ class JoinOnlineClass(Thread):
                         is_connected()
                         self.driver.refresh()
 
-        # waiting in class till next class and minimum 50 minutes
+        # waiting in class till next class and minimum 60 minutes
         while(True):
             timeSpentInWait = 0
             currentTime = datetime.now()
             
             # check if current time is greater than next class time and minimum time in class is greater than 60 minutes
-            if(currentTime.time()>=self.nextClassJoinTime.time()):
-                if(timeElapsed<=3600):
-                    break
-                else:
-                    self.driver.close()
-                    break  
+            if(timeElapsed<=3600):
+                self.driver.close()
+                break
             else:
                 # Checking if connection is Available or not
                 networkAvaliable = connectionCheck()
@@ -254,12 +264,13 @@ class JoinOnlineClass(Thread):
                         if not LOCK:
                             LOCK = True
                             self.driver.switch_to.window(self.tabId)
-                            self.driver.refresh()
+                            self.driver.refresh()                                   #Reconnecting
+                            LOCK = False
                             break
                         else:
                             logging.info("Waiting for other tabs to finish their task")
                             time.sleep(2)
-                            timeSpentInWait+2
+                            timeSpentInWait+=2
 
                 time.sleep(60)
                 timeElapsed+=60
@@ -267,4 +278,6 @@ class JoinOnlineClass(Thread):
         # converting total class joined seconds to minutes
         total_class_time_min = timeElapsed /60
         logger.warning("Attended " + self.lectureName + " Lecture for: " + str(total_class_time_min) + " minutes")
+        self.driver.close()
+
                     

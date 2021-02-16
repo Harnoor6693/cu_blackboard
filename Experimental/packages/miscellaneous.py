@@ -1,8 +1,7 @@
 import  socket, logging, time, coloredlogs, os
-from threading import Lock
 
 logger = logging.getLogger(__name__)
-coloredlogs.install(level='DEBUG', logger=logger)
+coloredlogs.install(fmt='%(asctime)s [%(levelname)s]: %(message)s',level='DEBUG', logger=logger)
 
 global LOCK, bbPermissionFlag
 LOCK = False
@@ -104,3 +103,21 @@ class GetUserDetails():
             logger.info(msg)
 
         return {'username':USERNAME,'password':PASSWORD}
+
+    def getCorrectDetails(self):
+        USERNAME=""
+        PASSWORD=""
+        while((len(USERNAME)<=0) and (len(PASSWORD)<=0)):
+                USERNAME = str(input("Enter Username: "))
+                PASSWORD = str(input("Enter Password: "))
+        try:
+            with open(self.userFileName,'w',encoding="utf8") as f:
+                f.write(USERNAME+" ")
+                f.write(PASSWORD)
+        except:
+            msg = f"Unable to write user details to disk: {self.userFileName}"
+            logger.error(msg)
+            logger.info("Exiting the program")
+            exit()
+            
+        return {'username':USERNAME, 'password':PASSWORD}

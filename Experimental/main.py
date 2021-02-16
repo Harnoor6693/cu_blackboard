@@ -1,15 +1,13 @@
-import os, logging, coloredlogs, time
+import os, time
 from pathlib import Path
 from datetime import datetime
-from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck
+from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger
 from packages.uims import UimsManagement
 from packages.BB import ClassManagement, LoginBB, JoinOnlineClass
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-logger = logging.getLogger(__name__)
-coloredlogs.install(level='DEBUG', logger=logger)
 
 # global variables
 global USERDATAFILENAME, TIMETABLE, CHROMEPATH
@@ -40,25 +38,21 @@ if __name__ == '__main__':
     # Reading all user details from csv file
     allDetails = uimsManagementOBJ.loadDetailsFromFIle()
 
-    BbClassManagementOBJ = ClassManagement()
-    lecturesToAttend = BbClassManagementOBJ.fromWhichLecture(allDetails)
-
     # Logging into BB Account
     BbLoginOBJ = LoginBB(userName,password,CHROMEPATH)
     driver = BbLoginOBJ.loginBB()
 
+    BbClassManagementOBJ = ClassManagement()
+    lecturesToAttend = BbClassManagementOBJ.fromWhichLecture(allDetails)
+
     IsLastClass = False
     # Looping through all Lectures
     for index in range(lecturesToAttend-1,len(allDetails)):
-        classJoinTime = BbClassManagementOBJ.joinClassDetails(allDetails[index], IsLastClass)
+        classJoinTime = BbClassManagementOBJ.joinClassDetails(allDetails[index])
         classJoinName = (allDetails[index])[1]
+        nextClassJoinTime = BbClassManagementOBJ.nextClassDetails(allDetails[index])
+        total_class_time = 0
 
-        # check if the class is last one
-        if(index+1<len(allDetails)):
-            nextClassJoinTime = BbClassManagementOBJ.joinClassDetails(allDetails[index+1],IsLastClass)
-        else:
-            IsLastClass=True
-            nextClassJoinTime = BbClassManagementOBJ.joinClassDetails(allDetails[index],IsLastClass)
 
         # checking if class time is less than next class time
         IsTimeToJoinClass = BbClassManagementOBJ.compareTime(classJoinTime)
@@ -68,7 +62,7 @@ if __name__ == '__main__':
             logger.critical(f"You missed lecture for: {classJoinName}")
         else:
             # checking if class joining link is available or not
-            IsLinkAvailable = BbClassManagementOBJ.checkLinkAvailability(driver, classJoinName, nextClassJoinTime, classJoinTime)
+            IsLinkAvailable = BbClassManagementOBJ.checkLinkAvailability(driver, classJoinName, nextClassJoinTime,driver.window_handles[0])
 
         
         if IsTimeToJoinClass and IsLinkAvailable[0]:
@@ -91,7 +85,11 @@ if __name__ == '__main__':
             currentTime = datetime.strptime(f"{datetime.now().time()}","%H:%M:%S.%f")
             timeTowait = nextClassJoinTime - currentTime
             timeTowait = timeTowait.total_seconds()
-            logger.info(f"Next class in {timeTowait} seconds.....")
+
+            logger.info("Waiting for next class ..... ")
+            
+            while(True):
+                time.sleep()
             time.sleep(timeTowait)
         
     driver.close()

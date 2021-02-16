@@ -5,11 +5,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .miscellaneous import is_connected, connectionCheck
-import logging, re, requests, csv, coloredlogs
+from .miscellaneous import is_connected, connectionCheck, logger, GetUserDetails
+import re, requests, csv
 
-logger = logging.getLogger(__name__)
-coloredlogs.install(level='DEBUG', logger=logger)
 
 
 class UimsManagement():
@@ -43,7 +41,7 @@ class UimsManagement():
         try:
             chrome_options = Options()
             chrome_options.add_argument("--use-fake-ui-for-media-stream")
-            chrome_options.add_argument(f"user-data-dir={self.chromePath}")
+            #chrome_options.add_argument(f"user-data-dir={self.chromePath}")
             chrome_options.add_argument('log-level=3')
             driver = webdriver.Chrome(options=chrome_options)
         except:
@@ -54,22 +52,36 @@ class UimsManagement():
         if not networkAvaliable:
             is_connected()
         
-
+        logger.info("Logging into UIMS")
         # entering username and password in CUIMS
         while(networkAvaliable):
             try:
                 driver.get('https://uims.cuchd.in/uims/')
-                driver.find_element_by_name('txtUserId').send_keys(self.userName)
-                driver.find_element_by_name('btnNext').click()
-                driver.find_element_by_name('txtLoginPassword').send_keys(self.password)
-                driver.find_element_by_name('btnLogin').click()
-                break
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@name='txtUserId']"))).send_keys(self.userName)
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@name='btnNext']"))).click()
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@name='txtLoginPassword']"))).send_keys(self.password)
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//input[@name='btnLogin']"))).click()
             except:
-                driver.refresh()
                 logger.error("Problem Logging in UIMS")
                 is_connected()
 
+
+            # Checking if username and password are correct
+            driver.get('https://uims.cuchd.in/UIMS/StudentHome.aspx')
+            currentURL = str(driver.current_url) 
+            if currentURL!="https://uims.cuchd.in/UIMS/StudentHome.aspx":
+                logger.error("Username or Password is incorrect")
+                getDetailsOBJ = GetUserDetails("userData.txt")
+                newDetails = getDetailsOBJ.getCorrectDetails()
+                self.userName = newDetails['username']
+                self.password = newDetails['password']
+                logger.info(f"Username: {self.userName}  Password: {self.password}")
+            else:
+                logger.info("Logged is successfully to UIMS")
+                break
+
         # going to time table page
+        logger.info("Getting your Time Table")
         while(networkAvaliable):
             try:
                 driver.get('https://uims.cuchd.in/UIMS/frmMyTimeTable.aspx')
@@ -110,6 +122,7 @@ class UimsManagement():
                 
     # filtering data and extracting necessary details
     def loadDetailsFromFIle(self):
+        logger.info("Loading your details ..... ")
         file_path = self.fileName
         Empty = ""
 

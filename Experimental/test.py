@@ -1,8 +1,10 @@
-from datetime import datetime
-
-today = datetime.now()
-tempTime = datetime.strptime("3:30 PM", "%I:%M %p")
-difference = tempTime - datetime.strptime(f"{today.time()}","%H:%M:%S.%f")
-
-print(datetime.now().time())
-print(difference.total_seconds())
+import requests, json
+query = "Round-robin scheduling allows interactive tasks quicker access to the processor"
+query = query.replace(" ","+")
+print(query)
+answer = requests.get(f"http://duckduckgo.com/?q={query}&t=h_&ia=web")
+print(answer.content)
+print(answer)
+"""formated_reponse = json.dumps(json.loads(answer.text), indent=4, sort_keys=True)
+with open("test.json","w",encoding='utf8') as f:
+    f.writelines(formated_reponse)"""
