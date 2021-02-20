@@ -1,6 +1,7 @@
 from selenium import webdriver
 from .miscellaneous import is_connected, connectionCheck, LOCK, bbPermissionFlag, logger
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as chromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -21,26 +22,48 @@ class LoginBB():
             chromePath: path to default chrome profile
     """
 
-    def __init__(self, userName, password, chromePath):
+    def __init__(self, userName, password, chromePath,browserName):
         self.userName = userName
         self.password = password
         self.chromePath = chromePath
+        self.browserName = browserName
 
     # logging into BB account
     def loginBB(self):
 
-        # declaring chrome drivers
-        try:
-            chrome_options = Options()
-            chrome_options.add_argument("--use-fake-ui-for-media-stream")
-            #chrome_options.add_argument(f"user-data-dir={self.chromePath}")
-            chrome_options.add_argument('log-level=3')
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.maximize_window()
-        except:
-            logger.error("Check if chromedrivers are in path.")
-            logger.info("Exiting the program .....")
-            exit()
+        if self.browserName == "Google Chrome":
+            # declaring webdriver
+            try:
+                chrome_options = chromeOptions()
+                chrome_options.add_argument("--use-fake-ui-for-media-stream")
+                chrome_options.add_argument('log-level=3')
+                chrome_options.add_argument("--start-maximized")
+                driver = webdriver.Chrome(options=chrome_options)
+            except:
+                logger.error("Check if chromedrivers are in the path")
+                exit()
+        elif self.browserName == "Brave":
+            try:
+                brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
+                brave_options = chromeOptions()
+                brave_options.add_argument("--use-fake-ui-for-media-stream")
+                brave_options.add_argument('log-level=3')
+                brave_options.add_argument("--start-maximized")
+                brave_options.binary_location = brave_path
+                driver = webdriver.Chrome(executable_path=brave_path , chrome_options=brave_options)
+            except:
+                logger.error("Check if chromedrivers are in the path")
+                exit()
+        elif self.browserName == "Mozilla Firefox":
+            try:
+                firefox_options = FirefoxOptions()
+                firefox_options.add_argument("--use-fake-ui-for-media-stream")
+                firefox_options.add_argument('log-level=3')
+                firefox_options.add_argument("--start-maximized")
+                driver = webdriver.Firefox(options=firefox_options)
+            except:
+                logger.error("Check if geeckodriver are in the path")
+                exit()
 
         networkAvaliable = connectionCheck()
         if not networkAvaliable:
@@ -86,7 +109,7 @@ class ClassManagement():
 
 
     # substracting 15 minutes from class joining time
-    def joinClassDetails(data):
+    def joinClassDetails(self,data):
         time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
         classAttendTime = time12H - timedelta(minutes=15)
 
@@ -95,7 +118,7 @@ class ClassManagement():
 
 
     # adding 45 minutes to class joining time
-    def nextClassDetails(data):
+    def nextClassDetails(self,data):
         time12H = datetime.strptime(f"{data[0]}", "%I:%M %p")
         classAttendTime = time12H + timedelta(minutes=45)
 
@@ -114,6 +137,7 @@ class ClassManagement():
 
     # finding the joining link for particular class
     def checkLinkAvailability(self,driver, classJoinName, nextClassJoinTime, defaultTabId):
+        global LOCK
         spanToBeOpened = ""
         linkNotAvailable = True
         timeRemainsForNextClass = True
@@ -125,6 +149,17 @@ class ClassManagement():
             networkAvaliable = connectionCheck()
             if not networkAvaliable:
                 is_connected()
+
+            while(True):
+                if not LOCK:
+                    LOCK = True
+                    driver.switch_to.window(defaultTabId)
+                    break
+                else:
+                    logging.info("Waiting for other tabs to finish their task")
+                    time.sleep(2)
+            
+            driver.get('https://cuchd.blackboard.com/ultra/course')
 
             if firstTime:
                 firstTime=False
@@ -147,14 +182,6 @@ class ClassManagement():
             if not networkAvaliable:
                 is_connected()
 
-            while(True):
-                if not LOCK:
-                    LOCK = True
-                    self.driver.switch_to.window(self.defaultTabId)
-                    break
-                else:
-                    logging.info("Waiting for other tabs to finish their task")
-                    time.sleep(2)
             
             # opening dropdown to find class joining button
             while(networkAvaliable):
@@ -208,8 +235,19 @@ class JoinOnlineClass(Thread):
         global LOCK, bbPermissionFlag
         timeElapsed = 0
 
+        currentTime = datetime.now().time()
+        logger.info(f"Attending class {self.lectureName} at {currentTime}")
+
         # Switching to the class tab
-        self.driver.switch_to.window(self.tabId)
+        while(True):
+            if not LOCK:
+                LOCK = True
+                self.driver.switch_to.window(self.tabId)
+                break
+            else:
+                logging.info("Waiting for other tabs to finish their task")
+                time.sleep(2)
+        
 
 
         # Checking if connection is Available or not
@@ -224,7 +262,7 @@ class JoinOnlineClass(Thread):
 
             while(networkAvaliable):
                     try:
-                        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Yes. Audio is working.']"))).click()
+                        WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Yes. Audio is working.']"))).click()
                         audioTestFlag = True
                     except:
                         logger.error("Exception 1 occured in Audio Testing.")
@@ -234,17 +272,30 @@ class JoinOnlineClass(Thread):
                             WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Skip audio test']"))).click()
                         except:
                             logger.error("Exception 2 occured in Audio Testing.")
-                            continue
+                            is_connected()
+                            self.driver.refresh()
+                            
                          
                     try:
                         WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Yes. Video is working.']"))).click()
+                    except:
+                        logger.error("Error in providing Video permission to BB")
+                        is_connected()
+ 
+                    try:
                         WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Later']"))).click()
+                    except:
+                        logger.error("Error in providing permission to BB")
+                        is_connected()
+
+                    try:
                         WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Close']"))).click()
+                        LOCK = False
                         break
                     except:
                         logger.error("Error in providing permission to BB")
                         is_connected()
-                        self.driver.refresh()
+                        
 
         # waiting in class till next class and minimum 60 minutes
         while(True):
@@ -252,7 +303,7 @@ class JoinOnlineClass(Thread):
             currentTime = datetime.now()
             
             # check if current time is greater than next class time and minimum time in class is greater than 60 minutes
-            if(timeElapsed<=3600):
+            if(timeElapsed>=3600):
                 self.driver.close()
                 break
             else:
@@ -271,6 +322,14 @@ class JoinOnlineClass(Thread):
                             logging.info("Waiting for other tabs to finish their task")
                             time.sleep(2)
                             timeSpentInWait+=2
+
+            # Checking if Moderator removed you form class
+            try:
+                self.driver.get_element_by_xpath("//h1[text()='A moderator removed you']")
+                logger.warning("Moderator removed you form class.")
+                break
+            except:
+                pass
 
                 time.sleep(60)
                 timeElapsed+=60

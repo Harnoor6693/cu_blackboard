@@ -1,7 +1,7 @@
 import os, time
 from pathlib import Path
 from datetime import datetime
-from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger
+from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS
 from packages.uims import UimsManagement
 from packages.BB import ClassManagement, LoginBB, JoinOnlineClass
 from selenium.webdriver.support.wait import WebDriverWait
@@ -32,20 +32,39 @@ if __name__ == '__main__':
     if userDetails["failInput"]:
         exit()
 
+    # select Browser Name
+    selectedBrowser = BROWSERS[0]
+    print()
+    print("Select your browser: ")
+    for i in range(len(BROWSERS)):
+        print(f"{i+1}.    {BROWSERS[i]}")
+    print()
+    while(True):
+        try:
+            temp = int(input("Enter your browser choice: "))
+            temp-=1
+            break
+        except:
+            logger.warning("Enter a valid choice !!")
+            logger.info("Input can only be a number.")
+    selectedBrowser = BROWSERS[temp]
+    print()
+
+
     # Getting details from UIMS
-    uimsManagementOBJ = UimsManagement(TIMETABLE,userName,password,CHROMEPATH)
+    uimsManagementOBJ = UimsManagement(TIMETABLE,userName,password,CHROMEPATH, selectedBrowser)
     if not os.path.isfile(TIMETABLE):
         uimsManagementOBJ.getDetailsFromUIMS()
 
     # Reading all user details from csv file
     allDetails = uimsManagementOBJ.loadDetailsFromFIle()
 
-    # Logging into BB Account
-    BbLoginOBJ = LoginBB(userName,password,CHROMEPATH)
-    driver = BbLoginOBJ.loginBB()
-
     BbClassManagementOBJ = ClassManagement()
     lecturesToAttend = BbClassManagementOBJ.fromWhichLecture(allDetails)
+
+    # Logging into BB Account
+    BbLoginOBJ = LoginBB(userName,password,CHROMEPATH, selectedBrowser)
+    driver = BbLoginOBJ.loginBB()
 
     IsLastClass = False
     # Looping through all Lectures
@@ -55,16 +74,41 @@ if __name__ == '__main__':
         nextClassJoinTime = BbClassManagementOBJ.nextClassDetails(allDetails[index])
         total_class_time = 0
 
+        currentTime = datetime.strptime(f"{datetime.now().time()}","%H:%M:%S.%f")
+        if (currentTime<classJoinTime):
+            nextClassTemp = str(index+1) + ": " + allDetails[index][0] + " " + allDetails[index][1]
+            logger.info("Waiting for class ....")
+            timeTowait = classJoinTime - currentTime
+            timeTowait = timeTowait.total_seconds()
+            print()
+            while (timeTowait>0): 
+                mins, secs = divmod(timeTowait, 60)
+                hrs, mins = divmod(mins,60)
+                timer = '{:02d}:{:02d}:{:02d}'.format(int(hrs), int(mins), int(secs)) 
+                print(f"Time remaining for the class: [{nextClassTemp}]:\t",timer, end="\r") 
+                time.sleep(1) 
+                timeTowait -= 1
+            print()
+
+        if index == len(allDetails):
+            timeTowait = 3600
+            logger.info("Waiting for last class to end .....")
+            while (timeTowait>0): 
+                mins, secs = divmod(timeTowait, 60)
+                hrs, mins = divmod(mins,60)
+                timer = '{:02d}:{:02d}:{:02d}'.format(int(hrs), int(mins), int(secs)) 
+                print(f"Time remaining for the class: [{nextClassTemp}]:\t",timer, end="\r") 
+                time.sleep(1) 
+                timeTowait -= 1
+            print()
+
+
+        
+        # checking if class joining link is available or not
+        IsLinkAvailable = BbClassManagementOBJ.checkLinkAvailability(driver, classJoinName, nextClassJoinTime,driver.window_handles[0])
 
         # checking if class time is less than next class time
         IsTimeToJoinClass = BbClassManagementOBJ.compareTime(classJoinTime)
-
-        # check if time for class is gone or not
-        if not IsTimeToJoinClass:
-            logger.critical(f"You missed lecture for: {classJoinName}")
-        else:
-            # checking if class joining link is available or not
-            IsLinkAvailable = BbClassManagementOBJ.checkLinkAvailability(driver, classJoinName, nextClassJoinTime,driver.window_handles[0])
 
         
         if IsTimeToJoinClass and IsLinkAvailable[0]:
@@ -76,6 +120,7 @@ if __name__ == '__main__':
             while(networkAvaliable):
                 try:
                     WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.XPATH, f"//span[text()='{IsLinkAvailable[1]}']"))).click()
+                    time.sleep(5)
                     break
                 except:
                     logger.error(f"Unabale to join class: {classJoinName}. Retrying ....")
@@ -84,15 +129,15 @@ if __name__ == '__main__':
             joinClassOBJ = JoinOnlineClass(driver.window_handles[-1],driver.window_handles[0],driver,classJoinName,nextClassJoinTime)
             joinClassOBJ.start()
 
-            currentTime = datetime.strptime(f"{datetime.now().time()}","%H:%M:%S.%f")
-            timeTowait = nextClassJoinTime - currentTime
-            timeTowait = timeTowait.total_seconds()
+        
+        # if time to attend lecture is gone and link is not available    
+        elif not IsLinkAvailable[0]:
+            logger.error("Class Joining Link for " + classJoinName + " Lecture Not Found !!!")
+            classtojoin = False
 
-            logger.info("Waiting for next class ..... ")
-            
-            while(True):
-                time.sleep()
-            time.sleep(timeTowait)
+        # check if time for class is gone or not
+        elif not IsTimeToJoinClass:
+            logger.critical(f"You missed lecture for: {classJoinName}")
         
     driver.close()
     exit()

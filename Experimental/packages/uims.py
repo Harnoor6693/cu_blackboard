@@ -1,5 +1,6 @@
 from seleniumwire import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as chromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -7,7 +8,6 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from .miscellaneous import is_connected, connectionCheck, logger, GetUserDetails
 import re, requests, csv
-
 
 
 class UimsManagement():
@@ -26,27 +26,51 @@ class UimsManagement():
         chromePath: path to default google chrome profile
     """
 
-    def __init__(self, fileName, userName, password, chromePath):
+    def __init__(self, fileName, userName, password, chromePath, browserName):
         self.fileName = fileName
         self.userName = userName
         self.password = password
         self.chromePath = chromePath
+        self.browserName = browserName
 
 
 
     # getting time table from CUIMS
     def getDetailsFromUIMS(self):
 
-        # declaring webdriver
-        try:
-            chrome_options = Options()
-            chrome_options.add_argument("--use-fake-ui-for-media-stream")
-            #chrome_options.add_argument(f"user-data-dir={self.chromePath}")
-            chrome_options.add_argument('log-level=3')
-            driver = webdriver.Chrome(options=chrome_options)
-        except:
-            logger.error("Check if chromedrivers are in the path")
-            exit()
+        if self.browserName == "Google Chrome":
+            # declaring webdriver
+            try:
+                chrome_options = chromeOptions()
+                chrome_options.add_argument("--use-fake-ui-for-media-stream")
+                chrome_options.add_argument('log-level=3')
+                chrome_options.add_argument("--start-maximized")
+                driver = webdriver.Chrome(options=chrome_options)
+            except:
+                logger.error("Check if chromedrivers are in the path")
+                exit()
+        elif self.browserName == "Brave":
+            try:
+                brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
+                brave_options = chromeOptions()
+                brave_options.add_argument("--use-fake-ui-for-media-stream")
+                brave_options.add_argument('log-level=3')
+                brave_options.add_argument("--start-maximized")
+                brave_options.binary_location = brave_path
+                driver = webdriver.Chrome(executable_path=brave_path , chrome_options=brave_options)
+            except:
+                logger.error("Check if chromedrivers are in the path")
+                exit()
+        elif self.browserName == "Mozilla Firefox":
+            try:
+                firefox_options = FirefoxOptions()
+                firefox_options.add_argument("--use-fake-ui-for-media-stream")
+                firefox_options.add_argument('log-level=3')
+                firefox_options.add_argument("--start-maximized")
+                driver = webdriver.Firefox(options=firefox_options)
+            except:
+                logger.error("Check if geeckodriver are in the path")
+                exit()
 
         networkAvaliable = connectionCheck()
         if not networkAvaliable:

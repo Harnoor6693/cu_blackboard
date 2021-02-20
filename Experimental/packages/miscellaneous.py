@@ -3,9 +3,10 @@ import  socket, logging, time, coloredlogs, os
 logger = logging.getLogger(__name__)
 coloredlogs.install(fmt='%(asctime)s [%(levelname)s]: %(message)s',level='DEBUG', logger=logger)
 
-global LOCK, bbPermissionFlag
+global LOCK, bbPermissionFlag, BROWSERS
 LOCK = False
 bbPermissionFlag = False
+BROWSERS = ["Google Chrome","Mozilla Firefox","Brave"]
 
 # check if device is connected to internet
 def connectionCheck():

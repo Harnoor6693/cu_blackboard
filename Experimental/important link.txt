@@ -1,0 +1,15 @@
+https://docs.github.com/en/rest/reference/repos#releases
+
+Brave Browser: https://mundrisoft.com/tech-bytes/how-to-execute-selenium-script-in-brave-browser/
+
+
+error: Unable to open the current Lecture
+When class ends then it is unable to join new class
+
+error : if class time is gone then unable to attend and not checking the time also
+
+1. Support of all browsers. 
+2. if moderator removed you.
+3. Multiple user login.
+4. solid evidence of in class (Check for members of the class)
+5. set browser to full screeen.
