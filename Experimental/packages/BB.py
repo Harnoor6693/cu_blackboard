@@ -92,8 +92,13 @@ class ClassManagement():
     def fromWhichLecture(self,allDetails):
         # asking user from which lecture he/she wants to join
         # keeps on asking till the right input is given
+        tempCounter = 0
         while(True):
             # if int input is given or not
+            tempCounter+=1
+            if tempCounter>=3:
+                logger.warning("Consecutive 3 wrong inputs. Exiting .....")
+                exit()
             try:
                 lectureNumber = int(input("Enter from which Lecture you want to Attend: "))
                 print()
@@ -304,7 +309,6 @@ class JoinOnlineClass(Thread):
             
             # check if current time is greater than next class time and minimum time in class is greater than 60 minutes
             if(timeElapsed>=3600):
-                self.driver.close()
                 break
             else:
                 # Checking if connection is Available or not
@@ -337,6 +341,18 @@ class JoinOnlineClass(Thread):
         # converting total class joined seconds to minutes
         total_class_time_min = timeElapsed /60
         logger.warning("Attended " + self.lectureName + " Lecture for: " + str(total_class_time_min) + " minutes")
-        self.driver.close()
+        
+        # Switching to the class tab
+        while(True):
+            if not LOCK:
+                LOCK = True
+                self.driver.switch_to.window(self.tabId)
+                self.driver.close()
+                LOCK = False
+                break
+            else:
+                logging.info("Waiting for other tabs to finish their task")
+                time.sleep(2)
+        
 
                     

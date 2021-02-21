@@ -81,7 +81,10 @@ if __name__ == '__main__':
             timeTowait = classJoinTime - currentTime
             timeTowait = timeTowait.total_seconds()
             print()
-            while (timeTowait>0): 
+            while (timeTowait>0):
+                currentTime = datetime.strptime(f"{datetime.now().time()}","%H:%M:%S.%f")
+                timeTowait = classJoinTime - currentTime
+                timeTowait = timeTowait.total_seconds()
                 mins, secs = divmod(timeTowait, 60)
                 hrs, mins = divmod(mins,60)
                 timer = '{:02d}:{:02d}:{:02d}'.format(int(hrs), int(mins), int(secs)) 
@@ -139,7 +142,7 @@ if __name__ == '__main__':
         elif not IsTimeToJoinClass:
             logger.critical(f"You missed lecture for: {classJoinName}")
         
-    driver.close()
+    driver.quit()
     exit()
 
 

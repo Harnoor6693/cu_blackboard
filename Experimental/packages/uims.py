@@ -45,6 +45,7 @@ class UimsManagement():
                 chrome_options.add_argument("--use-fake-ui-for-media-stream")
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
+                chrome_options.headless = True
                 driver = webdriver.Chrome(options=chrome_options)
             except:
                 logger.error("Check if chromedrivers are in the path")
@@ -56,6 +57,7 @@ class UimsManagement():
                 brave_options.add_argument("--use-fake-ui-for-media-stream")
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
+                brave_options.headless = True
                 brave_options.binary_location = brave_path
                 driver = webdriver.Chrome(executable_path=brave_path , chrome_options=brave_options)
             except:
@@ -67,6 +69,7 @@ class UimsManagement():
                 firefox_options.add_argument("--use-fake-ui-for-media-stream")
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
+                firefox_options.headless = True
                 driver = webdriver.Firefox(options=firefox_options)
             except:
                 logger.error("Check if geeckodriver are in the path")
