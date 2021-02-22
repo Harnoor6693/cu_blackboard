@@ -12,4 +12,4 @@ error : if class time is gone then unable to attend and not checking the time al
 2. if moderator removed you.
 3. Multiple user login.
 4. solid evidence of in class (Check for members of the class)
-5. set browser to full screeen
+5. set browser to full screeen.
