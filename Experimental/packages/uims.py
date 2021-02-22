@@ -45,23 +45,25 @@ class UimsManagement():
                 chrome_options.add_argument("--use-fake-ui-for-media-stream")
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
-                chrome_options.headless = True
-                driver = webdriver.Chrome(options=chrome_options)
+                chrome_options.add_argument('--headless')
+                driver = webdriver.Chrome(options=chrome_options, executable_path="chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
+                input()
                 exit()
         elif self.browserName == "Brave":
             try:
-                brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
+                brave_path = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
                 brave_options = chromeOptions()
                 brave_options.add_argument("--use-fake-ui-for-media-stream")
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
-                brave_options.headless = True
+                brave_options.add_argument('--headless')
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(executable_path=brave_path , chrome_options=brave_options)
+                driver = webdriver.Chrome(chrome_options=brave_options)
             except:
                 logger.error("Check if chromedrivers are in the path")
+                input()
                 exit()
         elif self.browserName == "Mozilla Firefox":
             try:
@@ -69,10 +71,11 @@ class UimsManagement():
                 firefox_options.add_argument("--use-fake-ui-for-media-stream")
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
-                firefox_options.headless = True
-                driver = webdriver.Firefox(options=firefox_options)
+                firefox_options.add_argument('--headless')
+                driver = webdriver.Firefox(options=firefox_options, executable_path="geckodriver.exe")
             except:
                 logger.error("Check if geeckodriver are in the path")
+                input()
                 exit()
 
         networkAvaliable = connectionCheck()
@@ -108,6 +111,7 @@ class UimsManagement():
                 # User unable to give valid input
                 if newDetails['failInput']:
                     driver.close()
+                    input()
                     exit()
 
                 logger.info(f"Username: {self.userName}  Password: {self.password}")
@@ -118,7 +122,8 @@ class UimsManagement():
             # valid input but not valid cridentials for UIMS
             if tempCounter==3:
                 logger.error("3 unsuccessfull attempts to login. Exiting .....")
-                driver.close()
+                driver.quit()
+                input()
                 exit()
 
         # going to time table page
@@ -152,7 +157,7 @@ class UimsManagement():
             try:
                 open(self.fileName, 'w', encoding='utf8').write(textToWrite)
                 # closing this driver
-                driver.close()
+                driver.quit()
                 break
 
             except:
@@ -187,6 +192,7 @@ class UimsManagement():
         except:
             logger.error(f"Unable to read file: {file_path}")
             logger.info("Exiting the program .....")
+            input()
             exit()
 
         # finding all course code and course name
@@ -200,6 +206,7 @@ class UimsManagement():
         except:
             logger.error(f"Unable to read file: {file_path}")
             logger.info("Exiting the program .....")
+            input()
             exit()
 
         # finding unique course code and course name

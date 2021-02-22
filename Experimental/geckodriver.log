@@ -1,0 +1,22 @@
+1613973772928	geckodriver	INFO	Listening on 127.0.0.1:55692
+1613973776202	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileR4djWV"
+[Parent 6612, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 775))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 422))
+1613973815560	Marionette	INFO	Listening on port 55729
+1613973815933	Marionette	WARN	TLS certificate errors will be ignored for this session
+1613973816098	Marionette	ERROR	[15] No reply from Marionette:Register
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1613973833595	Marionette	INFO	Stopped listening on port 55729
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

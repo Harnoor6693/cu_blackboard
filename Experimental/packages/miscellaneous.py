@@ -71,6 +71,7 @@ class GetUserDetails():
                 msg = f"Unable to write user details to disk: {self.userFileName}"
                 logger.error(msg)
                 logger.info("Exiting the program")
+                input()
                 exit()
 
         else:
@@ -83,6 +84,7 @@ class GetUserDetails():
                 msg = f"Unable to read file: {self.userFileName}"
                 logger.error(msg)
                 logger.info("Exiting the program")
+                input()
                 exit()
             msg = f"The avaliable user details are: username: {USERNAME}    Password: {PASSWORD}"
             logger.info(msg)
@@ -117,6 +119,7 @@ class GetUserDetails():
                             msg = f"Unable to write user details to disk: {self.userFileName}"
                             logger.error(msg)
                             logger.info("Exiting the program")
+                            input()
                             exit()
 
                         choice='y'
@@ -157,6 +160,7 @@ class GetUserDetails():
             msg = f"Unable to write user details to disk: {self.userFileName}"
             logger.error(msg)
             logger.info("Exiting the program")
+            input()
             exit()
             
         return {'username':USERNAME, 'password':PASSWORD, 'failInput':failInput}

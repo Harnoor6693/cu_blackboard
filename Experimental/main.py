@@ -30,6 +30,7 @@ if __name__ == '__main__':
     userName = userDetails['username']
     password = userDetails['password']
     if userDetails["failInput"]:
+        input()
         exit()
 
     # select Browser Name
@@ -63,6 +64,7 @@ if __name__ == '__main__':
     lecturesToAttend = BbClassManagementOBJ.fromWhichLecture(allDetails)
 
     # Logging into BB Account
+    logger.info("Logging into Black Board")
     BbLoginOBJ = LoginBB(userName,password,CHROMEPATH, selectedBrowser)
     driver = BbLoginOBJ.loginBB()
 
@@ -143,6 +145,7 @@ if __name__ == '__main__':
             logger.critical(f"You missed lecture for: {classJoinName}")
         
     driver.quit()
+    input()
     exit()
 
 

@@ -38,21 +38,23 @@ class LoginBB():
                 chrome_options.add_argument("--use-fake-ui-for-media-stream")
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
-                driver = webdriver.Chrome(options=chrome_options)
+                driver = webdriver.Chrome(options=chrome_options, executable_path="chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
+                input()
                 exit()
         elif self.browserName == "Brave":
             try:
-                brave_path = "C:/Program Files (x86)/BraveSoftware/Brave-Browser/Application/brave.exe"
+                brave_path = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
                 brave_options = chromeOptions()
                 brave_options.add_argument("--use-fake-ui-for-media-stream")
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(executable_path=brave_path , chrome_options=brave_options)
+                driver = webdriver.Chrome(chrome_options=brave_options)
             except:
                 logger.error("Check if chromedrivers are in the path")
+                input()
                 exit()
         elif self.browserName == "Mozilla Firefox":
             try:
@@ -60,9 +62,10 @@ class LoginBB():
                 firefox_options.add_argument("--use-fake-ui-for-media-stream")
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
-                driver = webdriver.Firefox(options=firefox_options)
+                driver = webdriver.Firefox(options=firefox_options, executable_path="geckodriver.exe")
             except:
                 logger.error("Check if geeckodriver are in the path")
+                input()
                 exit()
 
         networkAvaliable = connectionCheck()
@@ -98,6 +101,7 @@ class ClassManagement():
             tempCounter+=1
             if tempCounter>=3:
                 logger.warning("Consecutive 3 wrong inputs. Exiting .....")
+                input()
                 exit()
             try:
                 lectureNumber = int(input("Enter from which Lecture you want to Attend: "))
@@ -303,8 +307,8 @@ class JoinOnlineClass(Thread):
                         
 
         # waiting in class till next class and minimum 60 minutes
+        timeSpentInWait = 0
         while(True):
-            timeSpentInWait = 0
             currentTime = datetime.now()
             
             # check if current time is greater than next class time and minimum time in class is greater than 60 minutes
@@ -335,11 +339,11 @@ class JoinOnlineClass(Thread):
             except:
                 pass
 
-                time.sleep(60)
-                timeElapsed+=60
+            time.sleep(15)
+            timeElapsed+=15
 
         # converting total class joined seconds to minutes
-        total_class_time_min = timeElapsed /60
+        total_class_time_min = (timeElapsed-timeSpentInWait) /60
         logger.warning("Attended " + self.lectureName + " Lecture for: " + str(total_class_time_min) + " minutes")
         
         # Switching to the class tab
