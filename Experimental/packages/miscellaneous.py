@@ -49,6 +49,7 @@ class GetUserDetails():
         # If user inputs multiple wrong inputs
         failInput = False
         tempCounter = 0
+        hasChangedDetails = False
 
         if not os.path.isfile(self.userFileName):
             USERNAME = str(input("Enter Username: "))
@@ -115,6 +116,7 @@ class GetUserDetails():
                             with open(self.userFileName,'w',encoding="utf8") as f:
                                 f.write(USERNAME+" ")
                                 f.write(PASSWORD)
+                            hasChangedDetails=True
                         except:
                             msg = f"Unable to write user details to disk: {self.userFileName}"
                             logger.error(msg)
@@ -135,7 +137,7 @@ class GetUserDetails():
             msg = f"Continuing with: username: {USERNAME}    Password: {PASSWORD}"
             logger.info(msg)
 
-        return {'username':USERNAME,'password':PASSWORD, 'failInput':failInput}
+        return {'username':USERNAME,'password':PASSWORD, 'failInput':failInput, 'hasChangedDetails':hasChangedDetails}
 
     def getCorrectDetails(self):
         USERNAME=""

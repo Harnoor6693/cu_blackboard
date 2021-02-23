@@ -46,7 +46,7 @@ class UimsManagement():
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
                 chrome_options.add_argument('--headless')
-                driver = webdriver.Chrome(options=chrome_options, executable_path="chromedriver.exe")
+                driver = webdriver.Chrome(options=chrome_options, executable_path="./chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
@@ -60,7 +60,7 @@ class UimsManagement():
                 brave_options.add_argument("--start-maximized")
                 brave_options.add_argument('--headless')
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(chrome_options=brave_options)
+                driver = webdriver.Chrome(chrome_options=brave_options, executable_path="./chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
@@ -72,7 +72,7 @@ class UimsManagement():
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
                 firefox_options.add_argument('--headless')
-                driver = webdriver.Firefox(options=firefox_options, executable_path="geckodriver.exe")
+                driver = webdriver.Firefox(options=firefox_options, executable_path="./geckodriver.exe")
             except:
                 logger.error("Check if geeckodriver are in the path")
                 input()
@@ -222,6 +222,7 @@ class UimsManagement():
                     
 
         # displaying all lectures of the day
+        print()
         print("Total Lectures Today: ")
         for i in range(len(join)):
             print(str(i+1) + ": " + join[i][0] + " " + join[i][1])

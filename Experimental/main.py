@@ -32,6 +32,9 @@ if __name__ == '__main__':
     if userDetails["failInput"]:
         input()
         exit()
+    
+    if (userDetails['hasChangedDetails']) and (not os.path.isfile(TIMETABLE)):
+        os.remove(TIMETABLE)
 
     # select Browser Name
     selectedBrowser = BROWSERS[0]
@@ -95,19 +98,6 @@ if __name__ == '__main__':
                 timeTowait -= 1
             print()
 
-        if index == len(allDetails):
-            timeTowait = 3600
-            logger.info("Waiting for last class to end .....")
-            while (timeTowait>0): 
-                mins, secs = divmod(timeTowait, 60)
-                hrs, mins = divmod(mins,60)
-                timer = '{:02d}:{:02d}:{:02d}'.format(int(hrs), int(mins), int(secs)) 
-                print(f"Time remaining for the class: [{nextClassTemp}]:\t",timer, end="\r") 
-                time.sleep(1) 
-                timeTowait -= 1
-            print()
-
-
         
         # checking if class joining link is available or not
         IsLinkAvailable = BbClassManagementOBJ.checkLinkAvailability(driver, classJoinName, nextClassJoinTime,driver.window_handles[0])
@@ -130,9 +120,10 @@ if __name__ == '__main__':
                 except:
                     logger.error(f"Unabale to join class: {classJoinName}. Retrying ....")
                     is_connected()
-            
+                    
             joinClassOBJ = JoinOnlineClass(driver.window_handles[-1],driver.window_handles[0],driver,classJoinName,nextClassJoinTime)
             joinClassOBJ.start()
+            joinClassOBJ.join()
 
         
         # if time to attend lecture is gone and link is not available    
@@ -143,6 +134,9 @@ if __name__ == '__main__':
         # check if time for class is gone or not
         elif not IsTimeToJoinClass:
             logger.critical(f"You missed lecture for: {classJoinName}")
+
+
+    logger.info("Waiting for all classes to end .....")
         
     driver.quit()
     input()

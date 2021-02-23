@@ -13,3 +13,5 @@ error : if class time is gone then unable to attend and not checking the time al
 3. Multiple user login.
 4. solid evidence of in class (Check for members of the class)
 5. set browser to full screeen.
+5. if user changes the username check for time table for the same
+6. verify if logged into bb

@@ -38,7 +38,7 @@ class LoginBB():
                 chrome_options.add_argument("--use-fake-ui-for-media-stream")
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
-                driver = webdriver.Chrome(options=chrome_options, executable_path="chromedriver.exe")
+                driver = webdriver.Chrome(options=chrome_options, executable_path="./chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
@@ -51,7 +51,7 @@ class LoginBB():
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(chrome_options=brave_options)
+                driver = webdriver.Chrome(chrome_options=brave_options, executable_path="./chromedriver.exe")
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
@@ -62,7 +62,7 @@ class LoginBB():
                 firefox_options.add_argument("--use-fake-ui-for-media-stream")
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
-                driver = webdriver.Firefox(options=firefox_options, executable_path="geckodriver.exe")
+                driver = webdriver.Firefox(options=firefox_options, executable_path="./geckodriver.exe")
             except:
                 logger.error("Check if geeckodriver are in the path")
                 input()
@@ -84,6 +84,12 @@ class LoginBB():
             except:
                 logger.error("Unable to login BB")
                 is_connected()
+
+        time.sleep(2)
+        driver.get("https://cuchd.blackboard.com/ultra/course")
+        currentURL = str(driver.current_url)
+        if currentURL == "https://cuchd.blackboard.com/ultra/course":
+            logger.info("Logged in successfully to Black Board")
 
         return driver
 
