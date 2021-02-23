@@ -15,3 +15,4 @@ error : if class time is gone then unable to attend and not checking the time al
 5. set browser to full screeen.
 5. if user changes the username check for time table for the same
 6. verify if logged into bb
+7. check if user inputs ctrl+c (https://stackoverflow.com/questions/21252460/python-how-to-check-if-program-gets-aborted-by-user-while-running)

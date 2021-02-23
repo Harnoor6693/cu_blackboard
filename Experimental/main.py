@@ -1,7 +1,7 @@
-import os, time
+import os, time, signal
 from pathlib import Path
 from datetime import datetime
-from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS
+from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS, signal_handling
 from packages.uims import UimsManagement
 from packages.BB import ClassManagement, LoginBB, JoinOnlineClass
 from selenium.webdriver.support.wait import WebDriverWait
@@ -19,6 +19,7 @@ temp = str(os.path.normpath("\\AppData\\local\\Google\\Chrome\\User Data\\Defaul
 CHROMEPATH = str(Path.home()) + temp
 
 
+signal.signal(signal.SIGINT,signal_handling)
 
 
 

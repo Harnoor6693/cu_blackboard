@@ -1,4 +1,4 @@
-import  socket, logging, time, coloredlogs, os
+import  socket, logging, time, coloredlogs, os, sys
 
 logger = logging.getLogger(__name__)
 coloredlogs.install(fmt='%(asctime)s [%(levelname)s]: %(message)s',level='DEBUG', logger=logger)
@@ -40,6 +40,32 @@ def is_connected():
         
         networkAvaliable = connectionCheck()
 
+
+def signal_handling(signum,frame):
+    
+    counter=0
+    while(True):
+        counter+=1
+        choice = str(input("\nDo you really want to exit the program(y/n): ")).lower().strip()
+        print()
+        if choice:
+            choice = choice[0]
+            if choice=='y':
+                input()        
+                sys.exit()
+            elif (choice!='y') and (choice!='n'):
+                logger.warning("Enter a valid input (y or n) !!!")
+            elif choice=='n':
+                break
+        else:                
+            logger.warning("Enter a valid input (y or n) !!!")
+
+        if counter==3:
+            logger.warning("3 Failed attempts. Exiting ")
+            input()        
+            sys.exit()
+            
+    
 
 class GetUserDetails():
     def __init__(self, userFileName):
