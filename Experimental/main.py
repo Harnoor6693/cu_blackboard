@@ -1,4 +1,4 @@
-import os, time, signal
+import os, time, signal, requests
 from pathlib import Path
 from datetime import datetime
 from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS, signal_handling, threeFailedInputs
@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 
 
 # global variables
-global USERDATAFILENAME, TIMETABLE, CHROMEPATH
+global USERDATAFILENAME, TIMETABLE, CHROMEPATH, VERSION
 
 USERDATAFILENAME = "userData.txt"
 TIMETABLE = "rptStudentTimeTable.csv"
@@ -18,12 +18,22 @@ TIMETABLE = "rptStudentTimeTable.csv"
 temp = str(os.path.normpath("\\AppData\\yal\\Google\\Chrome\\User Data\\Default"))
 CHROMEPATH = str(Path.home()) + temp
 
-
 signal.signal(signal.SIGINT,signal_handling)
 
+VERSION = "V2.0"
 
 
 if __name__ == '__main__':
+
+    # version control
+    url = "https://api.github.com/repos/namishkhanna/cu_blackboard/tags"
+    repo_response = requests.get(url)
+    repo_version = repo_response["name"]
+    if repo_version!=VERSION:
+        logger.critical("NEW UPDATE AVALIABLE. KINDLY RUN UPDATER.EXE.")
+        logger.info("Exiting .....")
+        input()
+        exit()
 
     # Geting user details
     getDetailsOBJ = GetUserDetails(USERDATAFILENAME)
