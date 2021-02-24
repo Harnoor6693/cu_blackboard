@@ -1,5 +1,6 @@
+from typing import Counter
 from selenium import webdriver
-from .miscellaneous import is_connected, connectionCheck, LOCK, bbPermissionFlag, logger
+from .miscellaneous import is_connected, connectionCheck, LOCK, bbPermissionFlag, logger,threeFailedInputs,fiveFailedAttempts
 from selenium.webdriver.chrome.options import Options as chromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,7 +9,7 @@ from selenium.webdriver.common.by import By
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup as bs4
 from threading import Thread
-import logging, time
+import logging, time, os
 
 
 
@@ -38,12 +39,13 @@ class LoginBB():
                 chrome_options.add_argument("--use-fake-ui-for-media-stream")
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
-                driver = webdriver.Chrome(options=chrome_options, executable_path="./chromedriver.exe")
+                driver = webdriver.Chrome(options=chrome_options)
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
                 exit()
         elif self.browserName == "Brave":
+            BraveFlag=False
             try:
                 brave_path = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
                 brave_options = chromeOptions()
@@ -51,18 +53,33 @@ class LoginBB():
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(chrome_options=brave_options, executable_path="./chromedriver.exe")
+                driver = webdriver.Chrome(chrome_options=brave_options)
+                BraveFlag=True
             except:
                 logger.error("Check if chromedrivers are in the path")
-                input()
-                exit()
+
+            if not BraveFlag:
+                try:
+                    brave_path = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+                    brave_options = chromeOptions()
+                    brave_options.add_argument("--use-fake-ui-for-media-stream")
+                    brave_options.add_argument('log-level=3')
+                    brave_options.add_argument("--start-maximized")
+                    brave_options.binary_location = brave_path
+                    driver = webdriver.Chrome(chrome_options=brave_options)
+                except:
+                    logger.error("Check if chromedrivers are in the path")
+                    logger.warning("Exiting ..... ")
+                    input()
+                    exit()
+
         elif self.browserName == "Mozilla Firefox":
             try:
                 firefox_options = FirefoxOptions()
                 firefox_options.add_argument("--use-fake-ui-for-media-stream")
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
-                driver = webdriver.Firefox(options=firefox_options, executable_path="./geckodriver.exe")
+                driver = webdriver.Firefox(options=firefox_options)
             except:
                 logger.error("Check if geeckodriver are in the path")
                 input()
@@ -73,7 +90,9 @@ class LoginBB():
             is_connected()
         
         # entering username and password in BB
+        counter=0
         while(networkAvaliable):
+            counter+=1
             try:
                 driver.get('https://cuchd.blackboard.com/')
                 WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//button[@class='button-1']"))).click()
@@ -84,6 +103,8 @@ class LoginBB():
             except:
                 logger.error("Unable to login BB")
                 is_connected()
+            if counter==5:
+                fiveFailedAttempts()
 
         time.sleep(2)
         driver.get("https://cuchd.blackboard.com/ultra/course")
@@ -101,14 +122,10 @@ class ClassManagement():
     def fromWhichLecture(self,allDetails):
         # asking user from which lecture he/she wants to join
         # keeps on asking till the right input is given
-        tempCounter = 0
+        counter = 0
         while(True):
             # if int input is given or not
-            tempCounter+=1
-            if tempCounter>=3:
-                logger.warning("Consecutive 3 wrong inputs. Exiting .....")
-                input()
-                exit()
+            counter+=1
             try:
                 lectureNumber = int(input("Enter from which Lecture you want to Attend: "))
                 print()
@@ -120,6 +137,8 @@ class ClassManagement():
             except:
                 logger.error("Invalid Input!!")
                 logger.info("Input can only be a number.")
+            if counter==3:
+                threeFailedInputs()
         return lectureNumber
 
 
@@ -228,7 +247,8 @@ class ClassManagement():
                 timeRemainsForNextClass = False
             
             time.sleep(30)
-            LOCK = False
+
+        LOCK = False
 
         if not linkNotAvailable:
             return [True,spanToBeOpened]
@@ -305,17 +325,18 @@ class JoinOnlineClass(Thread):
 
                     try:
                         WebDriverWait(self.driver, 15).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Close']"))).click()
-                        LOCK = False
+                        
                         break
                     except:
                         logger.error("Error in providing permission to BB")
                         is_connected()
+
+        LOCK = False
                         
 
         # waiting in class till next class and minimum 60 minutes
         timeSpentInWait = 0
         while(True):
-            currentTime = datetime.now()
             
             # check if current time is greater than next class time and minimum time in class is greater than 60 minutes
             if(timeElapsed>=3600):
@@ -339,7 +360,7 @@ class JoinOnlineClass(Thread):
 
             # Checking if Moderator removed you form class
             try:
-                self.driver.get_element_by_xpath("//h1[text()='A moderator removed you']")
+                self.driver.find_element_by_xpath("//h1[text()='A moderator removed you']")
                 logger.warning("Moderator removed you form class.")
                 break
             except:
@@ -347,10 +368,6 @@ class JoinOnlineClass(Thread):
 
             time.sleep(15)
             timeElapsed+=15
-
-        # converting total class joined seconds to minutes
-        total_class_time_min = (timeElapsed-timeSpentInWait) /60
-        logger.warning("Attended " + self.lectureName + " Lecture for: " + str(total_class_time_min) + " minutes")
         
         # Switching to the class tab
         while(True):
@@ -361,8 +378,11 @@ class JoinOnlineClass(Thread):
                 LOCK = False
                 break
             else:
-                logging.info("Waiting for other tabs to finish their task")
+                logging.warning("Waiting for other tabs to finish their task")
                 time.sleep(2)
         
+        # converting total class joined seconds to minutes
+        total_class_time_min = (timeElapsed-timeSpentInWait) /60
+        logger.warning("Attended " + self.lectureName + " Lecture for: " + str(total_class_time_min) + " minutes")
 
                     

@@ -1,4 +1,4 @@
-from seleniumwire import webdriver
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as chromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.common.by import By
@@ -6,8 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from bs4 import BeautifulSoup
 from datetime import datetime
-from .miscellaneous import is_connected, connectionCheck, logger, GetUserDetails
-import re, requests, csv
+from selenium.common.exceptions import TimeoutException
+from .miscellaneous import is_connected, connectionCheck, logger, GetUserDetails, fiveFailedAttempts, threeFailedInputs
+import re, time, csv, os
 
 
 class UimsManagement():
@@ -46,12 +47,15 @@ class UimsManagement():
                 chrome_options.add_argument('log-level=3')
                 chrome_options.add_argument("--start-maximized")
                 chrome_options.add_argument('--headless')
-                driver = webdriver.Chrome(options=chrome_options, executable_path="./chromedriver.exe")
+                prefs = {"download.default_directory" : str(os.getcwd())}
+                chrome_options.add_experimental_option("prefs",prefs)
+                driver = webdriver.Chrome(options=chrome_options)
             except:
                 logger.error("Check if chromedrivers are in the path")
                 input()
                 exit()
         elif self.browserName == "Brave":
+            BraveFlag=False
             try:
                 brave_path = "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
                 brave_options = chromeOptions()
@@ -59,12 +63,32 @@ class UimsManagement():
                 brave_options.add_argument('log-level=3')
                 brave_options.add_argument("--start-maximized")
                 brave_options.add_argument('--headless')
+                prefs = {"download.default_directory" : str(os.getcwd())}
+                brave_options.add_experimental_option("prefs",prefs)
                 brave_options.binary_location = brave_path
-                driver = webdriver.Chrome(chrome_options=brave_options, executable_path="./chromedriver.exe")
+                driver = webdriver.Chrome(chrome_options=brave_options)
+                BraveFlag=True
             except:
                 logger.error("Check if chromedrivers are in the path")
-                input()
-                exit()
+            
+            if not BraveFlag:
+                try:
+                    brave_path = "C:\\Program Files (x86)\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+                    brave_options = chromeOptions()
+                    brave_options.add_argument("--use-fake-ui-for-media-stream")
+                    brave_options.add_argument('log-level=3')
+                    brave_options.add_argument("--start-maximized")
+                    brave_options.add_argument('--headless')
+                    prefs = {"download.default_directory" : str(os.getcwd())}
+                    brave_options.add_experimental_option("prefs",prefs)
+                    brave_options.binary_location = brave_path
+                    driver = webdriver.Chrome(chrome_options=brave_options)
+                except:
+                    logger.error("Check if chromedrivers are in the path")
+                    logger.warning("Exiting ..... ")
+                    input()
+                    exit()
+            
         elif self.browserName == "Mozilla Firefox":
             try:
                 firefox_options = FirefoxOptions()
@@ -72,7 +96,12 @@ class UimsManagement():
                 firefox_options.add_argument('log-level=3')
                 firefox_options.add_argument("--start-maximized")
                 firefox_options.add_argument('--headless')
-                driver = webdriver.Firefox(options=firefox_options, executable_path="./geckodriver.exe")
+                profile = webdriver.FirefoxProfile()
+                profile.set_preference("browser.download.folderList", 2)
+                profile.set_preference("browser.download.manager.showWhenStarting", False)
+                profile.set_preference("browser.download.dir", str(os.getcwd()))
+                profile.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/csv")
+                driver = webdriver.Firefox(options=firefox_options,firefox_profile=profile)
             except:
                 logger.error("Check if geeckodriver are in the path")
                 input()
@@ -83,7 +112,7 @@ class UimsManagement():
             is_connected()
         
         logger.info("Logging into UIMS")
-        tempCounter = 0
+        counter = 0
         # entering username and password in CUIMS
         while(networkAvaliable):
             try:
@@ -101,7 +130,7 @@ class UimsManagement():
             driver.get('https://uims.cuchd.in/UIMS/StudentHome.aspx')
             currentURL = str(driver.current_url) 
             if currentURL!="https://uims.cuchd.in/UIMS/StudentHome.aspx":
-                tempCounter+=1
+                counter+=1
                 logger.error("Username or Password is incorrect")
                 getDetailsOBJ = GetUserDetails("userData.txt")
                 newDetails = getDetailsOBJ.getCorrectDetails()
@@ -120,15 +149,14 @@ class UimsManagement():
                 break
             
             # valid input but not valid cridentials for UIMS
-            if tempCounter==3:
-                logger.error("3 unsuccessfull attempts to login. Exiting .....")
-                driver.quit()
-                input()
-                exit()
+            if counter==3:
+                threeFailedInputs()
 
         # going to time table page
         logger.info("Getting your Time Table")
+        counter=0
         while(networkAvaliable):
+            counter+=1
             try:
                 driver.get('https://uims.cuchd.in/UIMS/frmMyTimeTable.aspx')
                 # checking if time table page is opned
@@ -137,34 +165,31 @@ class UimsManagement():
             except:
                 logger.error("Problem fetching Time Table")
                 is_connected()
+            if counter==5:
+                fiveFailedAttempts()
 
 
         html = driver.page_source
         soup = BeautifulSoup(html,"lxml")
         ControlID = str(soup(text=re.compile('ControlID')))[1722:1754]
-        Header = dict(driver.requests[-1].headers)
 
         # downloading time table csv file
         while(networkAvaliable):
             url = f'https://uims.cuchd.in/UIMS/Reserved.ReportViewerWebControl.axd?ReportSession=ycmrf5jtz5d1gjjcfk4bleib&Culture=1033&CultureOverrides=True&UICulture=1033&UICultureOverrides=True&ReportStack=1&ControlID={ControlID}&OpType=Export&FileName=rptStudentTimeTable&ContentDisposition=OnlyHtmlInline&Format=CSV'
             try:
-                r = requests.get(url, allow_redirects=True, stream = True, headers=Header)
-                textToWrite = (str(r.text)).replace('\r','')
+                if self.browserName == "Mozilla Firefox":
+                    driver.set_page_load_timeout(5)
+                driver.get(url)
+                time.sleep(2)
+                break
+            except TimeoutException:
+                break
             except:
                 logger.error("Problem downloading Time Table")
                 is_connected()
 
-            try:
-                open(self.fileName, 'w', encoding='utf8').write(textToWrite)
-                # closing this driver
-                driver.quit()
-                break
-
-            except:
-                logger.error("Unable to write Time Table to disk")
-                logger.info("Exiting the program ..... ")
-                driver.close()
-                exit()
+        
+        driver.quit()
                 
     # filtering data and extracting necessary details
     def loadDetailsFromFIle(self):

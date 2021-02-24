@@ -1,7 +1,7 @@
 import os, time, signal
 from pathlib import Path
 from datetime import datetime
-from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS, signal_handling
+from packages.miscellaneous import GetUserDetails,is_connected, connectionCheck, logger,BROWSERS, signal_handling, threeFailedInputs
 from packages.uims import UimsManagement
 from packages.BB import ClassManagement, LoginBB, JoinOnlineClass
 from selenium.webdriver.support.wait import WebDriverWait
@@ -15,7 +15,7 @@ global USERDATAFILENAME, TIMETABLE, CHROMEPATH
 USERDATAFILENAME = "userData.txt"
 TIMETABLE = "rptStudentTimeTable.csv"
 
-temp = str(os.path.normpath("\\AppData\\local\\Google\\Chrome\\User Data\\Default"))
+temp = str(os.path.normpath("\\AppData\\yal\\Google\\Chrome\\User Data\\Default"))
 CHROMEPATH = str(Path.home()) + temp
 
 
@@ -33,8 +33,9 @@ if __name__ == '__main__':
     if userDetails["failInput"]:
         input()
         exit()
+
     
-    if (userDetails['hasChangedDetails']) and (not os.path.isfile(TIMETABLE)):
+    if (userDetails['hasChangedDetails']) and (os.path.isfile(TIMETABLE)):
         os.remove(TIMETABLE)
 
     # select Browser Name
@@ -44,7 +45,9 @@ if __name__ == '__main__':
     for i in range(len(BROWSERS)):
         print(f"{i+1}.    {BROWSERS[i]}")
     print()
+    counter = 0
     while(True):
+        counter+=1
         try:
             temp = int(input("Enter your browser choice: "))
             temp-=1
@@ -52,6 +55,8 @@ if __name__ == '__main__':
         except:
             logger.warning("Enter a valid choice !!")
             logger.info("Input can only be a number.")
+        if counter==3:
+            threeFailedInputs()
     selectedBrowser = BROWSERS[temp]
     print()
 
@@ -124,7 +129,6 @@ if __name__ == '__main__':
                     
             joinClassOBJ = JoinOnlineClass(driver.window_handles[-1],driver.window_handles[0],driver,classJoinName,nextClassJoinTime)
             joinClassOBJ.start()
-            joinClassOBJ.join()
 
         
         # if time to attend lecture is gone and link is not available    
@@ -138,6 +142,7 @@ if __name__ == '__main__':
 
 
     logger.info("Waiting for all classes to end .....")
+    joinClassOBJ.join()
         
     driver.quit()
     input()

@@ -46,7 +46,10 @@ def signal_handling(signum,frame):
     counter=0
     while(True):
         counter+=1
-        choice = str(input("\nDo you really want to exit the program(y/n): ")).lower().strip()
+        try:
+            choice = str(input("\nDo you really want to exit the program(y/n): ")).lower().strip()
+        except:
+            pass
         print()
         if choice:
             choice = choice[0]
@@ -61,9 +64,18 @@ def signal_handling(signum,frame):
             logger.warning("Enter a valid input (y or n) !!!")
 
         if counter==3:
-            logger.warning("3 Failed attempts. Exiting ")
-            input()        
+            logger.warning("3 Failed attempts. Exiting ")      
             sys.exit()
+
+def threeFailedInputs():
+    logger.warning("3 Failed inputs. Exiting.....")
+    input()
+    sys.exit()
+
+def fiveFailedAttempts():
+    logger.warning("5 Failed attempts. Exiting.....")
+    input()
+    sys.exit()
             
     
 
@@ -117,7 +129,9 @@ class GetUserDetails():
             logger.info(msg)
 
             choice = 'n'
+            counter = 0
             while(choice!='y'):
+                counter+=1
                 print()
                 choice = str(input("Continue with same login details(y/n): ")).lower().strip()
                 print()
@@ -158,7 +172,12 @@ class GetUserDetails():
                 else:
                     logger.warning("Enter a valid choice !!! (y/n) ")
                     # Assigning some value to variable. So that it does not goes in infinite loop
-                    choice = 'n'                                                        
+                    choice = 'n' 
+
+                if counter==3:
+                    logger.warning("3 failed attempts. Exiting.")
+                    input()
+                    exit()                                                       
 
             msg = f"Continuing with: username: {USERNAME}    Password: {PASSWORD}"
             logger.info(msg)

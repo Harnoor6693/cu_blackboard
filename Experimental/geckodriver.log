@@ -20,3 +20,288 @@ console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resou
 
 ###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1614060154386	geckodriver	INFO	Listening on 127.0.0.1:49986
+1614070427025	geckodriver	INFO	Listening on 127.0.0.1:58898
+1614070430018	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofile6UUgEG"
+*** You are running in headless mode.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+[Parent 2908, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614070448767	Marionette	INFO	Listening on port 58906
+1614070449034	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614070449077	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileHsP7NY"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614070548031	Marionette	INFO	Listening on port 59062
+1614070548395	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614070548446	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/UIMS/Scripts/UIMSHome4.0.js?version=4.2, line 1: TypeError: $(...)[_$_1be1[454]] is not a function
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614070965757	Marionette	INFO	Stopped listening on port 59062
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614071609470	geckodriver	INFO	Listening on 127.0.0.1:59942
+1614071612630	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofile9fztaD"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614071617915	Marionette	INFO	Listening on port 59952
+1614071617968	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614071617997	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: resource://activity-stream/lib/ASRouter.jsm, line 987: NS_ERROR_ILLEGAL_VALUE: Component returned failure code: 0x80070057 (NS_ERROR_ILLEGAL_VALUE) [nsIObserverService.removeObserver]
+1614071654829	Marionette	INFO	Stopped listening on port 59952
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614071699744	geckodriver	INFO	Listening on 127.0.0.1:60076
+1614071702830	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileUU7DR5"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614071707723	Marionette	INFO	Listening on port 60086
+1614071708171	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614071708189	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/UIMS/Scripts/UIMSHome4.0.js?version=4.2, line 1: TypeError: $(...)[_$_1be1[454]] is not a function
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614071745087	Marionette	INFO	Stopped listening on port 60086
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614071795363	geckodriver	INFO	Listening on 127.0.0.1:60214
+1614071798453	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofiler6UeNL"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614071803541	Marionette	INFO	Listening on port 60224
+1614071803789	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614071803808	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614071825790	Marionette	INFO	Stopped listening on port 60224
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614071892122	geckodriver	INFO	Listening on 127.0.0.1:60360
+1614071895194	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofilexudnEn"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614071900093	Marionette	INFO	Listening on port 60368
+1614071900525	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614071900543	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614072030389	Marionette	INFO	Stopped listening on port 60368
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileOcsjwC"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614072007769	Marionette	INFO	Listening on port 60516
+1614072008167	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614072008206	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/UIMS/Scripts/UIMSHome4.0.js?version=4.2, line 1: TypeError: $(...)[_$_1be1[454]] is not a function
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614072052465	Marionette	INFO	Stopped listening on port 60516
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614072170504	geckodriver	INFO	Listening on 127.0.0.1:60674
+1614072173555	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofilem8Efq9"
+*** You are running in headless mode.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614072177793	Marionette	INFO	Listening on port 60684
+1614072177905	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614072177945	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "--headless" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileHfQk6W"
+*** You are running in headless mode.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614072340474	Marionette	INFO	Listening on port 60870
+1614072340858	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614072340882	Marionette	ERROR	[15] No reply from Marionette:Register
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.log: WebExtensions: reset-default-search: No addons in our list are installed.
+ner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileNsBJlg"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614072500229	Marionette	INFO	Listening on port 60958
+1614072500451	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614072500514	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614072517077	Marionette	ERROR	[33] No reply from Marionette:Register
+1614072522460	Marionette	ERROR	[35] No reply from Marionette:Register
+1614072523506	Marionette	INFO	Stopped listening on port 60958
+1614072782168	geckodriver	INFO	Listening on 127.0.0.1:61385
+1614072785256	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileBV26sm"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614072789995	Marionette	INFO	Listening on port 61393
+1614072790184	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614072790213	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+Marionette threw an error: TypeError: this.curBrowser.contentBrowser is null
+GeckoDriver.prototype.navigateTo@chrome://marionette/content/driver.js:1258:3
+
+1614072894285	Marionette	ERROR	[33] No reply from Marionette:Register
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'MarionetteEvents'
+Marionette threw an error: TypeError: browsingContextFn().currentWindowGlobal is null
+getMarionetteCommandsActorProxy/get/<@chrome://marionette/content/actors/MarionetteCommandsParent.jsm:332:29
+
+1614072935166	Marionette	INFO	Stopped listening on port 61393
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614073062554	geckodriver	INFO	Listening on 127.0.0.1:63077
+1614073065594	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofiledyWj7z"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614073070501	Marionette	INFO	Listening on port 63088
+1614073070918	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614073070976	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614073117903	Marionette	INFO	Stopped listening on port 63088
+1614073167456	geckodriver	INFO	Listening on 127.0.0.1:63235
+1614073170561	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofilerogDLD"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614073175283	Marionette	INFO	Listening on port 63244
+1614073175374	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614073175398	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614073217882	Marionette	INFO	Stopped listening on port 63244
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614073295676	geckodriver	INFO	Listening on 127.0.0.1:63411
+1614073298742	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileee6tzm"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614073304567	Marionette	INFO	Listening on port 63421
+1614073305121	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614073305154	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614073336469	Marionette	INFO	Stopped listening on port 63421
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1614073544793	geckodriver	INFO	Listening on 127.0.0.1:63681
+1614073547862	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--use-fake-ui-for-media-stream" "log-level=3" "--start-maximized" "-foreground" "-no-remote" "-profile" "C:\\Users\\noors\\AppData\\Local\\Temp\\rust_mozprofileuDlX80"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1614073553334	Marionette	INFO	Listening on port 63692
+1614073553791	Marionette	WARN	TLS certificate errors will be ignored for this session
+1614073553957	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+JavaScript warning: https://uims.cuchd.in/uims/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: https://uims.cuchd.in/uims/doodle/js/birthday.js, line 139: TypeError: canvas is null
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/ScriptResource.axd?d=mbGZm65DzNC0tMTq0ElbcZSAjdTmrjRkS9AS3be8A41pTb9i5tqUtwCRqog1X0yo1m2pFv4083ScPhP39UhZKIU5Xk57ymwX9MOQgH7IHMwuXEicisoUvpDiSJySHvdhJq6zMIaY_q8GE50mhQ-hDQ2&t=ffffffffdb8968b2, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://uims.cuchd.in/UIMS/Scripts/jquery-2.0.3.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1614073571086	Marionette	INFO	Stopped listening on port 63692
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
